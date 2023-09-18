@@ -32,7 +32,7 @@ class CommandeAPIView(generics.ListCreateAPIView):
         items = Commande.objects.filter(archived=False).all()
         serializer = CommandeSerializer(items, many=True)
         total_amount = Commande.total_amount()
-        print(total_amount)
+        # print(total_amount)
         return Response(serializer.data)
 
 

@@ -50,7 +50,7 @@ class CustomerSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True, source="createdBy")
     class Meta:
         model = Customer
-        fields = ('id', 'nom_complet', 'telephone', 'adresse', 'pays', 'Ville', 'sexe', 'cou', 'epaule', 'longueur_boubou', 'longueur_manche', 'cuisse', 'longueur_pantalon', 'hanche', 'ceinture', 'tour_bras', 'poitrine', 'taille', 'longueur_robe', 'longueur_poitrine', 'bretelle', 'longueur_jupe', 'longueur_haut', 'blouse', 'autre', 'createdBy', 'user','created_at', 'archived')        
+        fields = ('id', 'nom_complet', 'telephone', 'adresse', 'pays', 'Ville', 'sexe', 'cou', 'epaule', 'longueur_boubou', 'longueur_manche', 'cuisse', 'longueur_pantalon', 'hanche', 'ceinture', 'tour_bras', 'poitrine', 'taille', 'longueur_robe', 'longueur_poitrine', 'bretelle', 'longueur_jupe', 'longueur_haut', 'blouse', 'autre', 'createdBy', 'user','created_at', 'archived', 'mesure_client')        
 # fournisseur 
 class FournisseurSerializer(serializers.ModelSerializer):
     # user_id = UserSerializer(read_only=True)

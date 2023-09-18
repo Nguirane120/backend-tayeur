@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.postgres.fields import ArrayField
 from django.utils import timezone
 from .user import User
 
@@ -36,6 +37,7 @@ class Customer(models.Model):
     longueur_haut=models.IntegerField(null=True, blank=True)
     blouse=models.IntegerField(null=True, blank=True)
     autre=models.IntegerField(null=True, blank=True)
+    mesure_client = ArrayField(models.JSONField(), null=True, blank=True)
     # created_by = models.ForeignKey(User,null=True,on_delete=models.CASCADE)
     createdBy = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     created_at = models.DateTimeField(default=timezone.now)
