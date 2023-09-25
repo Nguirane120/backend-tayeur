@@ -36,6 +36,7 @@ class Commande(models.Model):
         super().__init__(*args, **kwargs)
         self._montant_restant = None  # Valeur par défaut pour montant_restant lors de la création
 
+    "hello"
     def update_montant_restant(self):
         transactions = self.transactions.filter(archived=False)
         montant_paye_total = transactions.aggregate(total=models.Sum('montant_paye'))['total']
