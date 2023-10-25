@@ -21,7 +21,7 @@ inflection==0.5.1
 itypes==1.2.0
 Jinja2==3.1.2
 MarkupSafe==2.1.1
-numpy==1.26.0
+numpy==1.21.6
 packaging==21.3
 pandas==2.1.0
 Pillow==9.3.0
