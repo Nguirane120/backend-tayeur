@@ -58,7 +58,7 @@ INSTALLED_APPS = [
     "rest_framework",
     # "django_rest_passwordreset",
     "drf_yasg",
-    "drf_yasg2",
+    # "drf_yasg2",
     "api_fewnu_compta.apps.ApiFewnuComptaConfig",
     "whitenoise.runserver_nostatic",
     "corsheaders",
