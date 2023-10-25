@@ -82,9 +82,11 @@ MIDDLEWARE = [
 
 
 SWAGGER_SETTINGS = { "DEFAULT_GENERATOR_CLASS": "rest_framework.schemas.generators.BaseSchemaGenerator", }
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
 
 GRAPH_MODELS = {
-    "all_applications": True,
+    "all_applications": True,   
     "group_models": True,
 }
 
