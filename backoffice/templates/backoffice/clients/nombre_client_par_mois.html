@@ -1,0 +1,42 @@
+<div class="conatainer">
+    <div class="row">
+        <div class="col-12 col-md-6">
+
+            <div class="card">
+                <div class="card-body">
+                    <h1>Nombre client par jour</h1>
+                    {% for entry in daily_customer_count%}
+                        <p class="text-center fw-bold fs-14">{{ entry.count}}</p>
+                        <div class="d-flex justify-content-around ">
+                            <p>Date creation: </p>
+                            <p>{{ entry.day|date:"Y-m-d" }}</p>
+                        </div>
+                        <div class="d-flex justify-content-around ">
+                            <p> Ajoutee par : </p>
+                            <p>{{  entry.createdBy__firstName}}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-6">
+
+            <div class="card">
+                <div class="card-body">
+                    <h1>Nombre client par semaine</h1>
+                    {% for entry in weekly_customer_count%}
+                        <p class="text-center fw-bold fs-14">{{ entry.count}}</p>
+                        <div class="d-flex justify-content-around ">
+                            <p>Date creation: </p>
+                            <p>{{ entry.week|date:"Y-m-d" }}</p>
+                        </div>
+                        <div class="d-flex justify-content-around ">
+                            <p>Ajoutee par : </p>
+                            <p>{{entry.createdBy__firstName}}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

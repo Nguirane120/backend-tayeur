@@ -8,6 +8,7 @@ import io, csv, pandas as pd
 from ..models import *
 from django.http import HttpResponse
 from datetime import datetime, timedelta,date
+from rest_framework.parsers import MultiPartParser, FormParser
 from django.views.decorators.csrf import csrf_exempt
 
 
@@ -18,6 +19,8 @@ class CommandeAPIView(generics.ListCreateAPIView):
     """
     queryset = Commande.objects.all()
     serializer_class = CommandeSerializer
+    
+
 
     def post(self, request, format=None):
         serializer = CommandeSerializer(data=request.data)
@@ -43,6 +46,7 @@ class CommandeByIdAPIView(generics.RetrieveUpdateDestroyAPIView):
     # )
     queryset = Commande.objects.all()
     serializer_class = CommandeSerializer
+    parser_classes = (MultiPartParser, FormParser)
 
     def get(self, request, id, format=None):
         try:
@@ -63,8 +67,12 @@ class CommandeByIdAPIView(generics.RetrieveUpdateDestroyAPIView):
                 "status": "failure",
                 "message": "no such item with this id",
                 }, status=404)
-        self.data = request.data.copy()        
-        serializer = CommandeSerializer(item, data=self.data, partial= True)
+        
+
+        # if 'modele' in request.data:
+        #     item.image = request.data['modele']
+        
+        serializer = CommandeSerializer(item, data=request.data, partial= True)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
