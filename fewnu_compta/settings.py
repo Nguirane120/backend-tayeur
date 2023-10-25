@@ -81,6 +81,8 @@ MIDDLEWARE = [
 ]
 
 
+SWAGGER_SETTINGS = { "DEFAULT_GENERATOR_CLASS": "rest_framework.schemas.generators.BaseSchemaGenerator", }
+
 GRAPH_MODELS = {
     "all_applications": True,
     "group_models": True,
