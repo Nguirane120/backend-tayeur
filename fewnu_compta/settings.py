@@ -45,7 +45,7 @@ ALLOWED_HOSTS = ["*"]
 # django.setup()
 
 
-# Application definition
+"Application definition"
 
 INSTALLED_APPS = [
     "jazzmin",
