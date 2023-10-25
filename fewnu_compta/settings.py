@@ -146,7 +146,7 @@ WSGI_APPLICATION = "fewnu_compta.wsgi.application"
 
 # }
 DATABASES = {
-    "default": dj_database_url.config(
+    "default": dj_database_url.parse(
         default="postgres://tayeur_gestion_user:3QwZNBSGDlotcSFzfGoan2JLtsH8I7Hg@dpg-cksituprfc9c738f3bq0-a/tayeur_gestion",
     )
 }
