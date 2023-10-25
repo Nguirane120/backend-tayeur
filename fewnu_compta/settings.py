@@ -56,7 +56,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
-    "django_rest_passwordreset",
+    # "django_rest_passwordreset",
     "drf_yasg",
     "drf_yasg2",
     "api_fewnu_compta.apps.ApiFewnuComptaConfig",
