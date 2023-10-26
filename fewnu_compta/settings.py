@@ -58,7 +58,7 @@ INSTALLED_APPS = [
     "rest_framework",
     # "django_rest_passwordreset",
     "drf_yasg",
-    # "drf_yasg2",
+    "drf_yasg2",
     "api_fewnu_compta.apps.ApiFewnuComptaConfig",
     "whitenoise.runserver_nostatic",
     "corsheaders",
@@ -134,23 +134,27 @@ WSGI_APPLICATION = "fewnu_compta.wsgi.application"
 # DATABASES = { 'default': dj_database_url.config() }
 
 # for local
-# DATABASES = {
-#   'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': os.environ['DB_NAME'],
-#         'USER': os.environ['DB_USER'],
-#         'PASSWORD': os.environ['DB_PASSWORD'],
-#         'HOST': os.environ['DB_HOST'],
-#         'PORT': os.environ['DB_PORT'],
-#     }
+DATABASES = {
+  'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ['DB_NAME'],
+        'USER': os.environ['DB_USER'],
+        'PASSWORD': os.environ['DB_PASSWORD'],
+        'HOST': os.environ['DB_HOST'],
+        'PORT': os.environ['DB_PORT'],
+    }
 
+}
+
+RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+if RENDER_EXTERNAL_HOSTNAME: ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
+
+# DATABASES = {
+#     "default": dj_database_url.parse(
+#         "postgres://tayeur_gestion_user:3QwZNBSGDlotcSFzfGoan2JLtsH8I7Hg@dpg-cksituprfc9c738f3bq0-a.oregon-postgres.render.com/tayeur_gestion"
+#     )
 # }
 
-DATABASES = {
-    "default": dj_database_url.parse(
-        "postgres://tayeur_gestion_user:3QwZNBSGDlotcSFzfGoan2JLtsH8I7Hg@dpg-cksituprfc9c738f3bq0-a/tayeur_gestion"
-    )
-}
 
 
 # for docker
