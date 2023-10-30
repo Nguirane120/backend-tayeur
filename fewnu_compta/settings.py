@@ -64,7 +64,7 @@ INSTALLED_APPS = [
     "corsheaders",
     "backoffice",
     "django_extensions",
-    "gestion_horaire",
+    # "gestion_horaire",
 ]
 
 MIDDLEWARE = [
@@ -151,7 +151,7 @@ if RENDER_EXTERNAL_HOSTNAME: ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
 DATABASES = {
     "default": dj_database_url.parse(
-        "postgres://tayeur_gestion_user:3QwZNBSGDlotcSFzfGoan2JLtsH8I7Hg@dpg-cksituprfc9c738f3bq0-a.oregon-postgres.render.com/tayeur_gestion"
+        "postgres://tayeur_backend_user:FJSY5OKFcRxW3VYvV3DN1pzjVk6qeI8W@dpg-ckvrcni37rbc73e61lo0-a.oregon-postgres.render.com/tayeur_backend"
     )
 }
 

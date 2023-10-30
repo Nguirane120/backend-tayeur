@@ -24,7 +24,7 @@ urlpatterns = [
     path("api/", include("api_fewnu_compta.urls")),
     path("api/v2/", include("rest_framework.urls")),
     path("backoffice/", include("backoffice.urls")),
-    path("tayeur-horraire/", include("gestion_horaire.urls")),
+    # path("tayeur-horraire/", include("gestion_horaire.urls")),
 
     # modification password 
     path('change_password/', auth_views.PasswordChangeView.as_view()),
