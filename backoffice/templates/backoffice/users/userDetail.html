@@ -1,29 +1,62 @@
-{% extends "backoffice/base.html" %}
+{% extends 'backoffice/base.html' %}
 
 {% block content %}
-<div class="container">
-    <h5 class="text-center">Detail du Tayeur {{user.firstName}}  {{user.lastName}} </h5>
+  <div class="container">
+    <h5 class="text-center">Detail du Tayeur {{ user.firstName }} {{ user.lastName }}</h5>
     <div class="row">
-        <div class="col-12">
-
-            <div class="card boder-0">
-                <div class="card-body">
-                    <p>NOM: {{user.firstName}} </p>
-                    <p>PRENOM: {{user.lastName}}</p>
-                    <p>TELEPHONE: {{user.phone}}</p>
-                    <p>ADRESSE: {{user.adresse}}</p>
-                    <div class="d-flex justify-content-center">
-                        {% if user.archived %}
-                        <p class="fs-14 bg-warning p-3 text-light">cette utilisateur a ete archivee</p>
-                        {% else %}
-                        <a href="{% url 'delete-user' user.id %}" class="btn btn-danger
-                         text-decoration-none">Archiver</a>
-                        {% endif %}
-                    </div>
-                </div>
+      <div class="col-12">
+        <div class="card boder-0">
+          <div class="card-body">
+            <div class="d-flex">
+              <div>
+                <p>NOM: {{ user.firstName }}</p>
+                <p>PRENOM: {{ user.lastName }}</p>
+                <p>TELEPHONE: {{ user.phone }}</p>
+                <p>ADRESSE: {{ user.adresse }}</p>
+              </div>
+           
             </div>
-        </div>
+            <div class="d-flex justify-content-around">
+                <div>
 
+                <p>NOMBRE DE CLIENTS : {{ num_clients }}</p>
+                {% if clients_dates_ajout %}
+                <p>Date(s) d'ajout des clients : </p>
+                <ul>
+                    {% for date in clients_dates_ajout %}
+                        <li>{{ date|date:"m-d-Y"  }}</li>
+                    {% endfor %}
+                </ul>
+
+                {% else %}
+                  <p>Aucun client associé à cet utilisateur.</p>
+                {% endif %}
+                </div>
+              <div>
+                   <p>NOMBRE DE COMMANDES : {{ num_commandes }}</p>
+                {% if commandes_dates_ajout %}
+                  <p>Date(s) d'ajout des commandes: </p>
+                  <ul>
+                    {% for date in commandes_dates_ajout %}
+                        <li>{{ date|date:"m-d-Y"  }}</li>
+                    {% endfor %}
+                  </ul>
+                {% else %}
+                  <p>Aucune commande associée à cet utilisateur.</p>
+                {% endif %} 
+              </div>
+            </div>
+           
+            <div class="d-flex justify-content-center">
+              {% if user.archived %}
+                <p class="fs-14 bg-warning p-3 text-light">cette utilisateur a ete archivee</p>
+              {% else %}
+                <a href="{% url 'delete-user' user.id %}" class="btn btn-danger text-decoration-none">Archiver</a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-</div>
-{% endblock content %}
+  </div>
+{% endblock %}
