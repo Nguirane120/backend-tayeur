@@ -1,0 +1,212 @@
+
+
+{% extends "backoffice/base.html" %}
+{% load static %}
+
+{% block content %}
+<link href="{% static 'css/tab.css'%}" rel="stylesheet">
+
+<h1>{{stats}}</h1>
+<div class="container">
+
+</div>
+<section id="tabs" class="project-tab">
+    <div class="container-fluid w-100">
+        <div class="row">
+            <div class="col-md-12">
+                <nav>
+                    <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Utilisateurs</a>
+                        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Clients</a>
+                        <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Commandes</a>
+                    </div>
+                </nav>
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                        <p class="text-uppercase my-2 text-bold">NOMBRE D'UTILISATEUR Date d'aujourd'hui : {{ user_day_length }}</p>
+                        <table class="table" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    {% comment %} <th>Nombre</th> {% endcomment %}
+                                    <th>Date</th>
+                                    {% comment %} <th>Date il y a une semaine</th> {% endcomment %}
+                                    {% comment %} <th>Date il y a un mois</th> {% endcomment %}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for entry in users_by_day %}
+                                    <tr>
+                                        {% comment %} <td>
+                                            {% if entry.count > 0 %}
+                                                {{ entry.count }}
+                                            {% else %}
+                                                no user
+                                            {% endif %}
+                                        </td> {% endcomment %}
+                                        <td>{{ today }}</td>
+                                       
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+
+                        <p class="text-uppercase my-2 text-bold">NOMBRE D'UTILISATEUR Date il y a une semaine : {% for entry in users_by_week %} 
+                            {% if entry.count == null %}
+                                        {{ entry.count }}
+                                    {% else %}
+                                        no user
+                        {% endif %}
+                    {% endfor %}</p>
+
+                        <table class="table" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for entry in users_by_week %}
+                                    <tr>
+                                      
+                                       <td>
+                                        {% if entry.count == null %}
+                                        {{ entry.count }}
+                                    {% else %}
+                                        no user
+                                    {% endif %}
+                                       </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                            <p class="text-uppercase my-2 text-bold">NOMBRE D'UTILISATEUR Date il y a 3 mois : {{ user_week_length }}</p>
+                        <table class="table" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    {% comment %} <th>Nombre</th> {% endcomment %}
+                                    <th>Date il y a 3 mois</th>
+                                    {% comment %} <th>Date il y a un mois</th> {% endcomment %}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for entry in users_by_month %}
+                                    <tr>
+                                        <td>
+                                            {% if entry.count == null %}
+                                            {{ entry.count }}
+                                        
+                                        {% endif %}
+                                           </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        
+                    </div>
+                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                        <table class="table" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Project Name</th>
+                                    <th>Employer</th>
+                                    <th>Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><a href="#">Work 1</a></td>
+                                    <td>Doe</td>
+                                    <td>john@example.com</td>
+                                </tr>
+                                <tr>
+                                    <td><a href="#">Work 2</a></td>
+                                    <td>Moe</td>
+                                    <td>mary@example.com</td>
+                                </tr>
+                                <tr>
+                                    <td><a href="#">Work 3</a></td>
+                                    <td>Dooley</td>
+                                    <td>july@example.com</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                        <table class="table" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Contest Name</th>
+                                    <th>Date</th>
+                                    <th>Award Position</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><a href="#">Work 1</a></td>
+                                    <td>Doe</td>
+                                    <td>john@example.com</td>
+                                </tr>
+                                <tr>
+                                    <td><a href="#">Work 2</a></td>
+                                    <td>Moe</td>
+                                    <td>mary@example.com</td>
+                                </tr>
+                                <tr>
+                                    <td><a href="#">Work 3</a></td>
+                                    <td>Dooley</td>
+                                    <td>july@example.com</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% block script %}
+<script>
+
+  
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+            datasets: [{
+                label: '# of Votes',
+                data: [12, 19, 3, 5, 2, 3],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    }); 
+
+    </script>
+{% endblock script %}
+
+
+    
+
+{% endblock %}

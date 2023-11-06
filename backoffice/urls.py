@@ -10,6 +10,8 @@ urlpatterns = [
     path('clients', clientsList, name='clients'),
     path('commandes', commandeList, name='commandes'),
     path("login", loginPage, name="login"),
-    path("logout", logOutUser, name="logout")
+    path("logout", logOutUser, name="logout"),
+    path('statistiques', statistiques, name='statistuqes'),
+
 
 ]   
