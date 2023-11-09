@@ -67,6 +67,7 @@ urlpatterns = [
             #parametre
             path('parametres/', views.ParametreList.as_view()),
             path('parametres/user/<int:id>/', views.ParametreByUser.as_view()),
+            path('parametres/<int:id>/', views.ParametreByIdAPIView.as_view()),
             # path('profiles/<int:id>/', views.CompanyByIdAPIView.as_view()),
 
             # path('envoyer-message/', SendTwilioMessageView.as_view(), name='envoyer-message'),

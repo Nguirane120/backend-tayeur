@@ -25,6 +25,50 @@ class ParametreList(generics.ListCreateAPIView):
         return Response(serializer.data)
         
 
+class ParametreByIdAPIView(generics.RetrieveUpdateAPIView):
+    # permission_classes = (
+    #     permissions.IsAuthenticated,
+    # )
+    queryset = Parametre.objects.all()
+    serializer_class = ParametreSerializer
+
+    def get(self, request, id, format=None):
+        try:
+            item = Parametre.objects.get(pk=id)
+            serializer = ParametreSerializer(item)
+            return Response(serializer.data)
+        except Parametre.DoesNotExist:
+            return Response({
+                "status": "failure",
+                "message": "no such item with this id",
+                }, status=404)
+
+    def put(self, request, id, format=None):
+        try:
+            item = Parametre.objects.get(pk=id)
+        except Parametre.DoesNotExist:
+            return Response({
+                "status": "failure",
+                "message": "no such item with this id",
+                }, status=404)
+        self.data = request.data.copy()        
+        serializer = ParametreSerializer(item, data= self.data, partial= True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=400)
+
+    # def delete(self, request, *args, **kwargs):
+    #     try:
+    #         Parametre = Parametre.objects.filter(archived=False).get(id=kwargs["pk"])
+    #     except Parametre.DoesNotExist:
+    #         return Response({
+    #             "status": "failure",
+    #             "message": "no such item with this id",
+    #             }, status=404)
+    #     Parametre.archived=True
+    #     Parametre.save()
+    #     return Response({"message": "deleted"},status=204)
 
 
 class ParametreByUser(generics.RetrieveAPIView):
