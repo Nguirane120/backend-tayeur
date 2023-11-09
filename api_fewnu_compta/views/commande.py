@@ -99,7 +99,6 @@ class CommandeByIdAPIView(generics.RetrieveUpdateDestroyAPIView):
         item.save()
         return Response({"message": "deleted !"},status=204)
 
-
 class CommandeByUser(generics.RetrieveAPIView):
     queryset = Commande.objects.all()
     serializer_class = CommandeSerializer
@@ -142,7 +141,14 @@ class CommandeByUser(generics.RetrieveAPIView):
             today = date.today()
             next_month = today.replace(day=1) + timedelta(days=32)  # Ajoute 32 jours pour être sûr d'aller au mois suivant
             start_of_next_month = next_month.replace(day=1)
-            end_of_next_month = start_of_next_month.replace(month=start_of_next_month.month + 1, day=1) - timedelta(days=1)
+            if start_of_next_month.month == 12:
+                end_of_next_month = start_of_next_month.replace(year=start_of_next_month.year + 1, month=1, day=1) - timedelta(days=1)
+            else:
+                end_of_next_month = start_of_next_month.replace(month=start_of_next_month.month + 1, day=1) - timedelta(days=1)
+
+            commandes_mois_prochain = Commande.objects.filter(archived=False, createdBy=id, date_livraison__range=[start_of_next_month, end_of_next_month])
+            livrer_mois_prochain = CommandeMoisProchainSerializer(commandes_mois_prochain, many=True)
+
 
             commandes_mois_prochain = Commande.objects.filter(archived=False,createdBy=id,date_livraison__range=[start_of_next_month, end_of_next_month])
             livrer_mois_prochain = CommandeMoisProchainSerializer(commandes_mois_prochain, many=True)
