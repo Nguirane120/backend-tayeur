@@ -2,6 +2,7 @@ from django.db import models
 import time
 import os
 from .user import User
+from django.contrib.postgres.fields import ArrayField
 
 
 
@@ -18,7 +19,8 @@ class Parametre(models.Model):
     pays = models.CharField(max_length=120, blank=True, null=True)
     ville = models.CharField(max_length=120, blank=True, null=True)
     profile_image =  models.ImageField(upload_to=logo_directory_path, default="tayeur/tayeur-logo.png",null=True, blank=True)
-   
+    mesure_title = ArrayField(models.CharField(max_length=200), blank=True,null=True)
+
 
 
 class ParametreImage(models.Model):

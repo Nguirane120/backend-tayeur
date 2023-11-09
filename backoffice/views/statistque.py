@@ -24,27 +24,55 @@ def statistiques(request):
     three_months_ago = today - timedelta(days=90)  # Nouvelle période de 3 mois
 
 
-    users_by_day = User.objects.filter(date_joined__gte=today).values('date_joined').annotate(count=Count('id'))
+    users_by_day = User.objects.all()
 
-    users_by_week = User.objects.filter(date_joined__gte=one_week_ago).values('date_joined').annotate(
-        month=TruncWeek('date_joined')).annotate(count=Count('id'))
+    # for user in users_by_day:
+    #     print(len(user))
+    # users_by_week = User.objects.filter(date_joined__gte=one_week_ago).values('date_joined').annotate(
+    #     month=TruncWeek('date_joined')).annotate(count=Count('id'))
 
-    users_by_month = User.objects.filter(date_joined__gte=one_month_ago).annotate(
-        month=TruncMonth('date_joined')
-    ).values('month').annotate(count=Count('id'))
+    # users_by_month = User.objects.filter(date_joined__gte=one_month_ago).annotate(
+    #     month=TruncMonth('date_joined')
+    # ).values('month').annotate(count=Count('id'))
+   
+
+    # client_by_day = Customer.objects.filter(created_at__gte=today).values('created_at').annotate(count=Count('id'))
+    # client_by_week = Customer.objects.filter(created_at__gte=one_week_ago).values('created_at').annotate(
+    #     ).annotate(count=Count('id'))
+    
+    # client_by_month = Customer.objects.filter(created_at__gte=one_month_ago).annotate(
+    #     month=TruncMonth('created_at')
+    # ).annotate(count=Count('id'))
+
 
     
     user_day_length = len(users_by_day)
 
     
-    user_week_length = len(users_by_week)
+    # user_week_length = len(users_by_week)
+
+    # client_day_length = len(client_by_day)
+
+    
+    # client_week_length = len(client_by_week)
     
     # user_dates_ajout = [commande.date_commande for commande in commandes]
 
 
-    context = {"users_by_day":users_by_day,"users_by_week":users_by_week,"users_by_month":users_by_month,"today": today,
-        "one_week_ago": one_week_ago,
-        "one_month_ago": one_month_ago,"user_day_length":user_day_length,"user_week_length":user_week_length}
+    context = {"users_by_day":users_by_day,
+    #            "users_by_week":users_by_week,
+    # "users_by_month":users_by_month,
+    "today": today,
+        # "one_week_ago": one_week_ago,
+        # "one_month_ago": one_month_ago,
+        # "user_day_length":user_day_length,
+        # "user_week_length":user_week_length,
+        # "client_day_length":client_day_length,
+        # "client_by_day":client_by_day,
+        # "client_week_length":client_week_length,
+        # "client_by_week":client_by_week,
+        # "client_by_month":client_by_month,
+        }
     return render(request, "backoffice/statistiques.html", context)
 
 

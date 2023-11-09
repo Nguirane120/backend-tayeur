@@ -301,7 +301,7 @@ class ParametreSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Parametre
-        fields = ('userId', 'user', 'description', 'numWhtsapp', 'pays', 'ville', 'profile_image', 'nom_attelier','images', 'uploaded_images')
+        fields = ('userId', 'user', 'description', 'numWhtsapp', 'pays', 'ville', 'profile_image', 'nom_attelier','images', 'uploaded_images', "mesure_title")
        
 
 
