@@ -4,89 +4,37 @@
 {% load static %}
 
 {% block content %}
+<link href="{% static 'css/tab.css'%}" rel="stylesheet">
 
-
+<section id="tabs" class="project-tab">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <nav>
+                    <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Utilisateur/jour</a>
+                        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Utilisateur/semaine</a>
+                        <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Utilisateur/mois</a>
+                    </div>
+                </nav>
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                        {% include "backoffice/statistiques/user/userByDay.html" %}
+                    </div>
+                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                        {% include "backoffice/statistiques/user/userByWeek.html" %}
+                    </div>
+                    <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                        {% include "backoffice/statistiques/user/userByMonth.html" %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 
 <!-- Inclure Chart.js via CDN -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-<!-- Ajouter un élément canvas pour le graphique -->
-<h1>Nombre d'utiisateurs inscrit par jour</h1>
-<canvas id="userRegistrationChart" width="400" height="400"></canvas>
-
-<h1>Nombre d'utiisateurs inscrit par week-end</h1>
-<canvas id="userRegistrationByWeekChart" width="400" height="400"></canvas>
-
-<h1>Nombre d'utiisateurs inscrit par mois</h1>
-<canvas id="userRegistrationByMonthChart" width="400" height="400"></canvas>
-
-
-
-<script>
-    // Configurer les données pour le graphique
-    var ctx = document.getElementById('userRegistrationChart').getContext('2d');
-    var userRegistrationChart = new Chart(ctx, {
-        type: 'bar', // ou tout autre type de graphique
-        data: {
-            labels: {{ labels | safe }},
-            datasets: [{
-                label: 'Nombre d\'utilisateurs inscrits',
-                data: {{ data | safe }},
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                borderColor: 'rgba(75, 192, 192, 1)',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            // Configuration des options du graphique
-        }
-    });
-    
-</script>
-<script>
-    // Configurer les données pour le graphique
-    var ctx = document.getElementById('userRegistrationByWeekChart').getContext('2d');
-    var userRegistrationChart = new Chart(ctx, {
-        type: 'bar', // ou tout autre type de graphique
-        data: {
-            labels: {{ labelsWeek | safe }},
-            datasets: [{
-                label: 'Nombre d\'utilisateurs inscrits',
-                data: {{ dataWeek | safe }},
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                borderColor: 'rgba(75, 192, 192, 1)',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            // Configuration des options du graphique
-        }
-    });
-    
-</script>
-
-<script>
-    // Configurer les données pour le graphique
-    var ctx = document.getElementById('userRegistrationByMonthChart').getContext('2d');
-    var userRegistrationChart = new Chart(ctx, {
-        type: 'bar', // ou tout autre type de graphique
-        data: {
-            labels: {{ labelsMonth | safe }},
-            datasets: [{
-                label: 'Nombre d\'utilisateurs inscrits',
-                data: {{ dataMonth | safe }},
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                borderColor: 'rgba(75, 192, 192, 1)',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            // Configuration des options du graphique
-        }
-    });
-</script>
-  
 
 
     

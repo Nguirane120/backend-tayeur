@@ -1,0 +1,25 @@
+
+
+<h1 class="mt-3">Nombre d'utiisateurs inscrit par mois</h1>
+<canvas id="userRegistrationByMonthChart"></canvas>
+<script>
+    // Configurer les données pour le graphique
+    var ctx = document.getElementById('userRegistrationByMonthChart').getContext('2d');
+    var userRegistrationChart = new Chart(ctx, {
+        type: 'bar', // ou tout autre type de graphique
+        data: {
+            labels: {{ labelsMonth | safe }},
+            datasets: [{
+                label: 'Nombre d\'utilisateurs inscrits',
+                data: {{ dataMonth | safe }},
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            // Configuration des options du graphique
+        }
+    });
+</script>
+  
