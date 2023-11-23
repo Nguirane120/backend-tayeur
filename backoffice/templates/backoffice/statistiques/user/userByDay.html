@@ -1,5 +1,9 @@
-<h1 class="mt-3">Nombre d'utiisateurs inscrit par jour</h1>
-<canvas id="userRegistrationByDayChart"></canvas>
+<h1 class="">Nombre d'utilisateurs inscrit par jour</h1>
+<div style="">
+    <canvas id="userRegistrationByDayChart"></canvas>
+
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
@@ -9,18 +13,29 @@
         type: 'bar', // ou tout autre type de graphique
         data: {
             labels: {{ labels | safe }},
-            datasets: [{
+            datasets: [
+            {
                 label: 'Nombre d\'utilisateurs inscrits',
                 data: {{ data | safe }},
                 backgroundColor: 'rgba(75, 192, 192, 0.2)',
                 borderColor: 'rgba(75, 192, 192, 1)',
                 borderWidth: 1
-            }]
+            },
+            {
+                label: 'Nombre d\'utilisateurs actifs', // Mise à jour du label
+                data: [{{ active_users_count }}], // Mise à jour des données avec active_users_count
+                backgroundColor: 'red',
+                borderColor: 'red',
+                borderWidth: 1
+            }
+           
+            ]
         },
         options: {
             // Configuration des options du graphique
            
         }
+        
     });
     
 </script>

@@ -46,7 +46,7 @@ def userDetail(request, id):
 @login_required
 @user_passes_test(is_admin)
 def deleteUser(request, id):
-        user = User.objects.filter(archived=False).get(id=id)
+        user = User.objects.get(id=id)
         if request.method == "POST":
             user.archived =True
             user.save()
@@ -54,3 +54,27 @@ def deleteUser(request, id):
             return redirect('users')
         context = {"user":user}
         return render(request, 'backoffice/users/deleteUser.html', context)
+
+
+@login_required
+@user_passes_test(is_admin)
+def blocUser(request, id):
+        user = User.objects.get(id=id)
+        if request.method == "POST":
+            user.is_active =False
+            user.save()
+            messages.success(request, "Utilisateur " + user.firstName + " bloque avec success ")
+            return redirect('users')
+        context = {"user":user}
+        return render(request, 'backoffice/users/userList.html', context)
+@login_required
+@user_passes_test(is_admin)
+def dblocUser(request, id):
+        user = User.objects.get(id=id)
+        if request.method == "POST":
+            user.is_active = True
+            user.save()
+            messages.success(request, "Utilisateur " + user.firstName + " dbloque avec success ")
+            return redirect('users')
+        context = {"user":user}
+        return render(request, 'backoffice/users/userList.html', context)
