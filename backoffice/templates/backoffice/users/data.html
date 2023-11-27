@@ -1,5 +1,7 @@
-<div class="card shadow mb-4">
 
+
+<div class="message alert alert-success d-none"></div>
+<div class="card shadow mb-4">
 
 
   <div class="card-body">
@@ -14,9 +16,9 @@
 
                     <th>ID</th>
 
-                    <th>Prenom</th>
+                    <th>Prénom</th>
                     <th>Nom</th>
-                    <th>Telephone</th>
+                    <th>Téléphone</th>
                     <th>Adresse</th>
                     {% comment %} <th>Email</th> {% endcomment %}
 
@@ -105,6 +107,7 @@
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
+          
         </div>
       </div>
       <div class="modal-footer">
@@ -142,6 +145,8 @@
  document.addEventListener('DOMContentLoaded', function() {
   const confirmDeleteButtondblc = document.getElementById('confirm-delete-btn-debloc');
 
+
+
   confirmDeleteButtondblc.addEventListener('click', function() {
       // Vérifiez si userIdToDelete contient l'ID de l'utilisateur à supprimer
       if (userIdToDelete !== null) {
@@ -153,12 +158,16 @@
               },
           })
           .then(response => {
-            console.log({response})
               if (response.ok) {
                 const modalElement = document.getElementById('exampleModal');
-                const bootstrapModal = new bootstrap.Modal(modalElement); // Créez une instance de Modal Bootstrap
+                const bootstrapModal = new bootstrap.Modal(modalElement); 
                 bootstrapModal.hide();
                 window.location.reload()
+                const message = document.querySelector(".message")
+                message.append("Utilisateur debloquee")
+                setTimeout(() =>{
+                  message.classList.remove("d-none")
+                }, 2000)
                   console.log('Utilisateur debloquer avec succès.');
                   userIdToDelete = null;  // Réinitialisez userIdToDelete après la suppression réussie
               } else {

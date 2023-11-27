@@ -10,6 +10,8 @@ from django.db.models import Count
 from django.db.models.functions import TruncMonth,TruncWeek,TruncDate
 from django.utils import timezone
 from django.db.models.functions import ExtractWeek,ExtractMonth
+import locale
+
 
 
 
@@ -21,6 +23,20 @@ def is_admin(user):
 @user_passes_test(is_admin)
 def statistiques(request):
     active_users = User.objects.filter(is_active=True)
+    mois_fr = {
+    'January': 'Janvier',
+    'February': 'Février',
+    'March': 'Mars',
+    'April': 'Avril',
+    'May': 'Mai',
+    'June': 'Juin',
+    'July': 'Juillet',
+    'August': 'Août',
+    'September': 'Septembre',
+    'October': 'Octobre',
+    'November': 'Novembre',
+    'December': 'Décembre'
+}
 
  
     user_registration_data = User.objects.annotate(date=TruncDate('date_joined')).values('date').annotate(count=Count('id')).order_by('-date')
@@ -28,7 +44,7 @@ def statistiques(request):
     data = [entry['count'] for entry in user_registration_data]
 
     user_registration_data_by_month = User.objects.annotate(month=TruncMonth('date_joined')).values('month').annotate(count=Count('id')).order_by('-month')
-    labelsMonth = [entry['month'].strftime('%Y-%m') for entry in user_registration_data_by_month]
+    labelsMonth = [mois_fr[entry['month'].strftime('%B')] for entry in user_registration_data_by_month]
     dataMonth = [entry['count'] for entry in user_registration_data_by_month]
 
     user_registration_dataByWeek = User.objects.annotate(week=TruncWeek('date_joined')).values('week').annotate(count=Count('id')).order_by('-week')
@@ -51,7 +67,7 @@ def statistiques(request):
 
         # Vérifier le nombre de clients ajoutés par mois
         for month in clients_added_by_month:
-            if month['count'] <= 20:
+            if month['count'] >= 20:
 
                 active_users_by_month.append(user.id)
 
@@ -76,14 +92,13 @@ def statistiques(request):
             .annotate(count=Count('id'))
         )
         for week in clients_added_by_week:
-                if week['count'] <= 10:
+                if week['count'] >= 10:
                     active_users_by_week.append(user.id)
 
    
 
     active_users_wee = len(set(active_users_by_week))
 
-    print('=====================week',active_users_wee)
 
 
 
@@ -105,12 +120,10 @@ def statistiques(request):
 
         # print(clients_added_per_day_by_user[user.id])
         for day in clients_added_by_day:
-            if day['count'] <= 5:
+            if day['count'] >= 5:
                 users_with_five_clients_per_day.append(user)
 
     active_users_count = len(set(users_with_five_clients_per_day))
-
-    print('=====================',active_users_count)
 
 
 
